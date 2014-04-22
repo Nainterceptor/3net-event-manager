@@ -1,0 +1,37 @@
+﻿@model _3NET_SyncWorld.Models.InviteFriendViewModel
+
+@{
+    ViewBag.Title = "Invite a friend";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.FriendUserId, "Select a friend", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FriendUserId", String.Empty)
+                @Html.ValidationMessageFor(model => model.FriendUserId)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

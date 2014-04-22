@@ -1,0 +1,110 @@
+﻿@using _3NET_SyncWorld.Models
+@model _3NET_SyncWorld.Models.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Event</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type.Label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type.Label)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Summary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Summary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator.Name)
+        </dd>
+        
+        <dt>@Html.DisplayNameFor(model => model.InvitedUsers)</dt>
+        <dd>
+            @if (!Model.InvitedUsers.Any())
+            {
+                <span>Nobody</span>
+            }
+            else
+            {
+                <ul>
+                    @foreach (ApplicationUser u in Model.InvitedUsers)
+                    {
+                        <li>@u.Name</li>
+                    }
+                </ul>
+            }
+        </dd>
+        
+        <dt>@Html.DisplayNameFor(model => model.Contributions)</dt>
+        <dd>
+            @if (!Model.Contributions.Any())
+            {
+                <span>Nothing</span>
+            }
+            else
+            {
+                <ul>
+                    @foreach (Contribution c in Model.Contributions)
+                    {
+                        <li>@c.Amount @c.Type.Label by @c.User.Name</li>
+                    }
+                </ul>
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Contribute", "Create", "Contribution", new { id = Model.Id }, null) |
+    @Html.ActionLink("Invite a friend", "InviteFriend", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
